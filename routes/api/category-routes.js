@@ -20,6 +20,7 @@ router.get('/:id', async (req, res) => {
   try {
     const {id} = req.params;
     const data = await Category.findByPk(id, {include: [Product]});
+    res.json(data);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -30,6 +31,7 @@ router.post('/', async (req, res) => {
   try {
     const {category_name} = req.body;
     const data = await Category.create({category_name});
+    res.json(data);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -41,6 +43,7 @@ router.put('/:id', async (req, res) => {
     const {category_name} = req.body;
     const {id} = req.params;
     const data = await Category.update({category_name}, {where: {id}});
+    res.json(data);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -51,6 +54,7 @@ router.delete('/:id', async (req, res) => {
   try {
     const {id} = req.params;
     const data = await Category.destroy({where: {id}});
+    res.json(data);
   } catch (error) {
     res.status(500).json(error);
   }

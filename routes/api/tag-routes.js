@@ -8,6 +8,7 @@ router.get('/', async (req, res) => {
   // be sure to include its associated Product data
   try {
     const data = await Tag.findAll({include: [{model: Product}]});
+    res.json(data);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -19,6 +20,7 @@ router.get('/:id', async (req, res) => {
   try {
     const {id} = req.params;
     const data = await Tag.findByPk(id, {include: [{model: Product}]});
+    res.json(data);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -39,7 +41,9 @@ router.put('/:id', async (req, res) => {
   // update a tag's name by its `id` value
   try {
     const {tag_name} = req.body;
+    const {id} = req.params;
     const data = await Tag.update({tag_name}, {where: {id}});
+    res.json(data);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -50,6 +54,7 @@ router.delete('/:id', async (req, res) => {
   try {
     const {id} = req.params;
     const data = await Tag.destroy({where: {id}});
+    res.json(data);
   } catch (error) {
     res.status(500).json(error);
   }
